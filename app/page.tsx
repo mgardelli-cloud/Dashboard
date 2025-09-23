@@ -73,7 +73,7 @@ export default function Home() {
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
       // Sostituisci "YOUR_API_KEY_HERE" con la tua chiave API di OpenWeatherMap
-      const apiKey = "cf811c20e0ff9d0881742fc8988d41a0"
+      const apiKey = "YOUR_API_KEY_HERE"
       if (apiKey === "YOUR_API_KEY_HERE") {
         console.error("Errore: Inserisci la tua chiave API di OpenWeatherMap per visualizzare il meteo.");
         return;
@@ -134,7 +134,7 @@ export default function Home() {
         <header className="flex justify-between items-center mb-12 sm:mb-16">
           <div>
             <h1 className="text-3xl sm:text-4xl font-light tracking-tight">Dashboard</h1>
-            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">Planning</p>
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">Minimalista</p>
           </div>
           <button
             onClick={toggleTheme}
