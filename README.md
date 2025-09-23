@@ -1,6 +1,4 @@
-# Minimalist Portfolio Website
 
-A clean, modern portfolio website built with Next.js and Tailwind CSS, featuring smooth animations and dark/light theme support.
 
 ## ✨ Features
 
@@ -15,22 +13,7 @@ A clean, modern portfolio website built with Next.js and Tailwind CSS, featuring
 - [Next.js](https://nextjs.org/) - React framework
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [v0.dev](https://v0.dev/) - AI-powered development
 
-## 📦 Getting Started
-
-\`\`\`bash
-# Clone the repository
-git clone https://github.com/felixmacaspac/v0-minimalist-portfolio.git
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-\`\`\`
-
-Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
 ## 🎨 Customization
 
@@ -38,4 +21,3 @@ The portfolio is designed to be easily customizable:
 
 - Update personal information in `app/page.tsx`
 - Modify colors and styling in `app/globals.css`
-- Add or remove sections as needed
