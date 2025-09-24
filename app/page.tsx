@@ -131,12 +131,12 @@ export default function App() {
         {/* Intestazione con stile minimale */}
         <header className="flex justify-between items-center mb-16 border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="flex items-center gap-4">
-            <Menu className="w-6 h-6 text-gray-500 dark:text-gray-400 cursor-pointer" />
-            <h1 className="text-2xl font-light tracking-wide">DASHBOARD</h1>
+            <Menu className="w-6 h-6 text-gray-900 dark:text-gray-400 cursor-pointer" />
+            <h1 className="text-2xl font-light tracking-wide text-gray-900 dark:text-white">DASHBOARD</h1>
           </div>
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 focus:outline-none"
+            className="p-2 rounded-full text-gray-900 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 focus:outline-none"
             aria-label="Toggle theme"
           >
             {isDark ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
@@ -147,9 +147,9 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           
           {/* Scheda Meteo e Ora */}
-          <div className="lg:col-span-3 p-8 rounded-lg border border-gray-200 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between animate-fade-in-up">
+          <div className="lg:col-span-3 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col md:flex-row items-center justify-between animate-fade-in-up">
             <div className="text-center md:text-left mb-6 md:mb-0">
-              <p className="text-8xl font-light">{dateTime.time}</p>
+              <p className="text-8xl font-light text-gray-900 dark:text-white">{dateTime.time}</p>
               <h2 className="text-xl font-medium mt-2 text-gray-500 dark:text-gray-400">{dateTime.date}</h2>
             </div>
             {weather ? (
@@ -165,7 +165,7 @@ export default function App() {
           </div>
           
           {/* Scheda To-Do List */}
-          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 flex flex-col animate-fade-in-up-delay-100">
+          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up-delay-100">
             <h2 className="text-xl sm:text-2xl font-light mb-4 text-gray-900 dark:text-gray-200">To-Do List</h2>
             <div className="space-y-4 flex-grow">
               {todos.map((todo, index) => (
@@ -194,7 +194,7 @@ export default function App() {
                   if (e.key === "Enter") addTodo()
                 }}
                 placeholder="Aggiungi una nuova attività"
-                className="w-full p-3 rounded-lg bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-sm placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500 transition-all"
+                className="w-full p-3 rounded-lg bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-sm placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500 transition-all text-gray-900 dark:text-white"
               />
               <button
                 onClick={addTodo}
@@ -207,18 +207,18 @@ export default function App() {
           </div>
 
           {/* Scheda Eventi Calendario */}
-          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 flex flex-col animate-fade-in-up-delay-200">
+          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up-delay-200">
             <h2 className="text-xl sm:text-2xl font-light mb-4 text-gray-900 dark:text-gray-200">Eventi Calendario</h2>
             <div className="space-y-4">
               {events.map((event, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-gray-500 dark:bg-gray-400"></div>
-                  <p className="flex-grow text-base">{event}</p>
+                  <p className="flex-grow text-base text-gray-900 dark:text-white">{event}</p>
                 </div>
               ))}
             </div>
             <textarea
-              className="mt-8 w-full p-4 h-32 rounded-lg bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500 transition-all resize-none text-sm"
+              className="mt-8 w-full p-4 h-32 rounded-lg bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500 transition-all resize-none text-sm text-gray-900 dark:text-white"
               placeholder="Scrivi qui i tuoi eventi..."
               value={events.join('\n')}
               onChange={(e) => setEvents(e.target.value.split('\n'))}
