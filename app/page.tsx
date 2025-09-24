@@ -20,7 +20,7 @@ const getFormattedDateTime = () => {
 }
 
 const WeatherIcon = ({ condition, isDaytime }) => {
-  const iconProps = "w-24 h-24 sm:w-32 sm:h-32 text-gray-200 dark:text-gray-900 transition-transform duration-1000 transform animate-fade-in"
+  const iconProps = "w-24 h-24 sm:w-32 sm:h-32 text-gray-900 dark:text-gray-200 transition-transform duration-1000 transform animate-fade-in"
   
   switch (condition) {
     case "Clear":
@@ -33,7 +33,7 @@ const WeatherIcon = ({ condition, isDaytime }) => {
     case "Snow":
       return <Snowflake className={iconProps} />;
     default:
-      return <Sun className={iconProps} />;
+      return isDaytime ? <Sun className={iconProps} /> : <Moon className={iconProps} />;
   }
 }
 
