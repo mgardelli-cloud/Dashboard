@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Sun, Cloud, CloudRain, Snowflake, Moon, Check, X, Plus } from "lucide-react"
+import { Sun, Cloud, CloudRain, Snowflake, Moon, Check, X, Plus, Menu } from "lucide-react"
 
 // Funzione per formattare la data e l'ora
 const getFormattedDateTime = () => {
@@ -20,7 +20,7 @@ const getFormattedDateTime = () => {
 }
 
 const WeatherIcon = ({ condition, isDaytime }) => {
-  const iconProps = "w-24 h-24 sm:w-32 sm:h-32 text-slate-700 dark:text-gray-200 transition-transform duration-1000 transform animate-fade-in"
+  const iconProps = "w-24 h-24 sm:w-32 sm:h-32 text-gray-200 dark:text-gray-900 transition-transform duration-1000 transform animate-fade-in"
   
   switch (condition) {
     case "Clear":
@@ -37,29 +37,27 @@ const WeatherIcon = ({ condition, isDaytime }) => {
   }
 }
 
-export default function Home() {
+export default function App() {
   const [dateTime, setDateTime] = useState(getFormattedDateTime())
   const [weather, setWeather] = useState(null)
-  const [isDark, setIsDark] = useState(true)
-  const [events, setEvents] = useState([
-    "Riunione con il team alle 10:00",
-    "Pranzo con Anna",
-  ])
-  const [todos, setTodos] = useState([
-    { text: "Completare il report", completed: false },
-    { text: "Preparare la presentazione", completed: true },
-  ])
+  const [isDark, setIsDark] = useState(true);
+  const [events, setEvents] = useState([])
+  const [todos, setTodos] = useState([])
   const [newTodo, setNewTodo] = useState("")
   const [isDaytime, setIsDaytime] = useState(true);
 
   // Tema chiaro/scuro
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark)
-  }, [isDark])
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark(!isDark)
-  }
+    setIsDark(!isDark);
+  };
 
   // Aggiorna data e ora ogni secondo
   useEffect(() => {
@@ -73,7 +71,7 @@ export default function Home() {
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
       // Sostituisci "YOUR_API_KEY_HERE" con la tua chiave API di OpenWeatherMap
-      const apiKey = "YOUR_API_KEY_HERE"
+      const apiKey = "cf811c20e0ff9d0881742fc8988d41a0"
       if (apiKey === "YOUR_API_KEY_HERE") {
         console.error("Errore: Inserisci la tua chiave API di OpenWeatherMap per visualizzare il meteo.");
         return;
@@ -127,67 +125,67 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500 font-sans p-4 sm:p-8">
+    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-950 dark:text-white font-sans p-4 sm:p-8">
       <div className="container mx-auto max-w-6xl">
         
-        {/* Intestazione e pulsante tema */}
-        <header className="flex justify-between items-center mb-12 sm:mb-16">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-light tracking-tight">Dashboard</h1>
-            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">Minimalista</p>
+        {/* Intestazione con stile minimale */}
+        <header className="flex justify-between items-center mb-16 border-b border-gray-200 dark:border-gray-800 pb-4">
+          <div className="flex items-center gap-4">
+            <Menu className="w-6 h-6 text-gray-500 dark:text-gray-400 cursor-pointer" />
+            <h1 className="text-2xl font-light tracking-wide">DASHBOARD</h1>
           </div>
           <button
             onClick={toggleTheme}
-            className="p-3 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-300"
+            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 focus:outline-none"
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            {isDark ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
           </button>
         </header>
 
         {/* Griglia della dashboard */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           
           {/* Scheda Meteo e Ora */}
-          <div className="col-span-1 lg:col-span-2 p-6 sm:p-8 rounded-2xl shadow-xl bg-white dark:bg-gray-800 flex flex-col md:flex-row items-center justify-between animate-fade-in-up">
+          <div className="lg:col-span-3 p-8 rounded-lg border border-gray-200 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between animate-fade-in-up">
             <div className="text-center md:text-left mb-6 md:mb-0">
-              <p className="text-2xl sm:text-3xl font-light">{dateTime.time}</p>
-              <h2 className="text-lg sm:text-xl font-medium mt-2">{dateTime.date}</h2>
+              <p className="text-8xl font-light">{dateTime.time}</p>
+              <h2 className="text-xl font-medium mt-2 text-gray-500 dark:text-gray-400">{dateTime.date}</h2>
             </div>
             {weather ? (
               <div className="flex flex-col items-center">
                 <WeatherIcon condition={weather.weather[0].main} isDaytime={isDaytime} />
-                <p className="text-4xl sm:text-5xl font-light mt-4">{Math.round(weather.main.temp)}°C</p>
-                <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mt-2">{weather.name}</p>
-                <p className="text-sm sm:text-base capitalize text-gray-500 dark:text-gray-400">{weather.weather[0].description}</p>
+                <p className="text-6xl font-light mt-4 text-gray-900 dark:text-white">{Math.round(weather.main.temp)}°C</p>
+                <p className="text-xl text-gray-500 dark:text-gray-400 mt-2">{weather.name}</p>
+                <p className="text-base capitalize text-gray-500 dark:text-gray-500">{weather.weather[0].description}</p>
               </div>
             ) : (
-              <div className="text-center text-gray-500 dark:text-gray-400">Caricamento meteo...</div>
+              <div className="text-center text-gray-500">Caricamento meteo...</div>
             )}
           </div>
           
           {/* Scheda To-Do List */}
-          <div className="col-span-1 p-6 sm:p-8 rounded-2xl shadow-xl bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up-delay-100">
-            <h2 className="text-xl sm:text-2xl font-light mb-4">To-Do List</h2>
-            <div className="space-y-3 flex-grow">
+          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 flex flex-col animate-fade-in-up-delay-100">
+            <h2 className="text-xl sm:text-2xl font-light mb-4 text-gray-900 dark:text-gray-200">To-Do List</h2>
+            <div className="space-y-4 flex-grow">
               {todos.map((todo, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <input
                     type="checkbox"
                     checked={todo.completed}
                     onChange={() => toggleTodo(index)}
-                    className="form-checkbox h-5 w-5 rounded text-gray-900 dark:text-gray-100 transition duration-150 ease-in-out"
+                    className="form-checkbox h-5 w-5 bg-gray-300 dark:bg-gray-800 border-gray-400 dark:border-gray-700 checked:bg-gray-600 dark:checked:bg-gray-400 rounded-sm cursor-pointer transition-colors duration-200"
                   />
-                  <span className={`flex-grow text-base ${todo.completed ? "line-through text-gray-500 dark:text-gray-400" : ""}`}>
+                  <span className={`flex-grow text-base ${todo.completed ? "line-through text-gray-500" : ""}`}>
                     {todo.text}
                   </span>
                   <button onClick={() => deleteTodo(index)} aria-label="Elimina">
-                    <X className="w-4 h-4 text-gray-400 hover:text-red-500 transition-colors" />
+                    <X className="w-4 h-4 text-gray-500 dark:text-gray-500 hover:text-red-500 transition-colors" />
                   </button>
                 </div>
               ))}
             </div>
-            <div className="mt-6 flex gap-2">
+            <div className="mt-8 flex gap-2">
               <input
                 type="text"
                 value={newTodo}
@@ -196,11 +194,11 @@ export default function Home() {
                   if (e.key === "Enter") addTodo()
                 }}
                 placeholder="Aggiungi una nuova attività"
-                className="w-full p-3 rounded-xl bg-gray-200 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-all text-sm"
+                className="w-full p-3 rounded-lg bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-sm placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500 transition-all"
               />
               <button
                 onClick={addTodo}
-                className="p-3 bg-slate-500 text-white rounded-xl shadow-md hover:bg-slate-600 transition-colors"
+                className="p-3 bg-gray-300 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-700 transition-colors"
                 aria-label="Aggiungi attività"
               >
                 <Plus className="w-5 h-5" />
@@ -209,18 +207,18 @@ export default function Home() {
           </div>
 
           {/* Scheda Eventi Calendario */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 p-6 sm:p-8 rounded-2xl shadow-xl bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up-delay-200">
-            <h2 className="text-xl sm:text-2xl font-light mb-4">Eventi Calendario</h2>
+          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 flex flex-col animate-fade-in-up-delay-200">
+            <h2 className="text-xl sm:text-2xl font-light mb-4 text-gray-900 dark:text-gray-200">Eventi Calendario</h2>
             <div className="space-y-4">
               {events.map((event, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-slate-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-gray-500 dark:bg-gray-400"></div>
                   <p className="flex-grow text-base">{event}</p>
                 </div>
               ))}
             </div>
             <textarea
-              className="mt-6 w-full p-4 h-32 rounded-xl bg-gray-200 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-all resize-none text-sm"
+              className="mt-8 w-full p-4 h-32 rounded-lg bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500 transition-all resize-none text-sm"
               placeholder="Scrivi qui i tuoi eventi..."
               value={events.join('\n')}
               onChange={(e) => setEvents(e.target.value.split('\n'))}
