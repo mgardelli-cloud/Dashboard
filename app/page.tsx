@@ -114,7 +114,7 @@ export default function App() {
 
   // Chiamata API per il meteo e l'inquinamento atmosferico
   useEffect(() => {
-    const apiKey = "c7631818267be06f45e432d6497d29c0"
+    const apiKey = "c7631818267be06f45e432d6497d29c1"
     if (apiKey === "YOUR_API_KEY_HERE") {
         console.error("Errore: Inserisci la tua chiave API di OpenWeatherMap per visualizzare il meteo e l'inquinamento atmosferico.");
         return;
