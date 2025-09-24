@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { Sun, Cloud, CloudRain, Snowflake, Moon, Check, X, Plus, Menu } from "lucide-react"
-import { useTheme } from "./layout" // Importa l'hook useTheme
 
 // Funzione per formattare la data e l'ora
 const getFormattedDateTime = () => {
@@ -41,13 +40,20 @@ const WeatherIcon = ({ condition, isDaytime }) => {
 export default function App() {
   const [dateTime, setDateTime] = useState(getFormattedDateTime())
   const [weather, setWeather] = useState(null)
+  const [isDark, setIsDark] = useState(true);
   const [events, setEvents] = useState([])
   const [todos, setTodos] = useState([])
   const [newTodo, setNewTodo] = useState("")
   const [isDaytime, setIsDaytime] = useState(true);
 
-  // Usa l'hook useTheme per accedere allo stato del tema
-  const { isDark, setIsDark } = useTheme();
+  // Tema chiaro/scuro
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -159,7 +165,7 @@ export default function App() {
           </div>
           
           {/* Scheda To-Do List */}
-          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up">
+          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up-delay-100">
             <h2 className="text-xl sm:text-2xl font-light mb-4 text-gray-900 dark:text-gray-200">To-Do List</h2>
             <div className="space-y-4 flex-grow">
               {todos.map((todo, index) => (
@@ -201,7 +207,7 @@ export default function App() {
           </div>
 
           {/* Scheda Eventi Calendario */}
-          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up">
+          <div className="col-span-1 md:col-span-1 p-8 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 flex flex-col animate-fade-in-up-delay-200">
             <h2 className="text-xl sm:text-2xl font-light mb-4 text-gray-900 dark:text-gray-200">Eventi Calendario</h2>
             <div className="space-y-4">
               {events.map((event, index) => (
