@@ -125,7 +125,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-950 dark:text-white font-sans p-4 sm:p-8">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-white font-sans p-4 sm:p-8">
       <div className="container mx-auto max-w-6xl">
         
         {/* Intestazione con stile minimale */}
@@ -176,7 +176,7 @@ export default function App() {
                     onChange={() => toggleTodo(index)}
                     className="form-checkbox h-5 w-5 bg-gray-300 dark:bg-gray-800 border-gray-400 dark:border-gray-700 checked:bg-gray-600 dark:checked:bg-gray-400 rounded-sm cursor-pointer transition-colors duration-200"
                   />
-                  <span className={`flex-grow text-base ${todo.completed ? "line-through text-gray-500" : ""}`}>
+                  <span className={`flex-grow text-base text-gray-900 dark:text-white ${todo.completed ? "line-through text-gray-500" : ""}`}>
                     {todo.text}
                   </span>
                   <button onClick={() => deleteTodo(index)} aria-label="Elimina">
